@@ -3,20 +3,19 @@ import re
 
 
 class Interactor():
-    fileName = "example.txt"
-    # fileName = "advent_day1_e1.txt"
     textNumber = ["zero", "two", "one", "nine", "five", "three", "eight", "four", "six", "seven"]
     digitNumber = ["0", "2", "1", "9", "5", "3", "8", "4", "6", "7"]
 
+    def __init__(self, contentLoader):
+        self.contentLoader = contentLoader
+
     def run(self):
         logging.basicConfig(level=logging.DEBUG)
-        fileContent = self.readInputFromFile()
+        fileContent = self.contentLoader.loadContent()
         total = self.calculateAndSum(fileContent)
         print(total)
 
-    def readInputFromFile(self):
-        f = open(self.fileName, "r")
-        return f.read()
+
 
     def calculateAndSum(self, rows):
         rows = rows.splitlines()
