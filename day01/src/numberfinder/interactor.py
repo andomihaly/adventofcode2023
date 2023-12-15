@@ -1,21 +1,22 @@
-import logging
 import re
-
+from loggercontext import LoggerContext
 
 class Interactor():
     textNumber = ["zero", "two", "one", "nine", "five", "three", "eight", "four", "six", "seven"]
     digitNumber = ["0", "2", "1", "9", "5", "3", "8", "4", "6", "7"]
+    logger = LoggerContext()
 
     def __init__(self, contentLoader):
         self.contentLoader = contentLoader
 
     def run(self):
-        logging.basicConfig(level=logging.DEBUG)
+        print(self.logger)
+        self.logger.info("process started")
         fileContent = self.contentLoader.loadContent()
+        self.logger.info("content loaded")
         total = self.calculateAndSum(fileContent)
+        self.logger.info("sum is calculated:"+str(total))
         print(total)
-
-
 
     def calculateAndSum(self, rows):
         rows = rows.splitlines()
@@ -29,10 +30,10 @@ class Interactor():
         return self.getNumberFromDigits(text)
 
     def convertTextNumberToDigit(self, text):
-        logging.debug("original: " + text)
+        self.logger.debug("original: " + text)
         for i in range(len(self.textNumber) - 1):
             text = text.replace(self.textNumber[i], self.digitNumber[i])
-        logging.debug("new:      " + text)
+        self.logger.debug("new:      " + text)
         return text
 
     def getNumberFromDigits(self, text):
@@ -40,7 +41,7 @@ class Interactor():
         s1 = self.getFirstDigit(digits)
         s2 = self.getLastDigit(digits)
         number = s1 + s2
-        logging.debug(number)
+        self.logger.debug(number)
         return int(number)
 
     def getFirstDigit(self, digits):
