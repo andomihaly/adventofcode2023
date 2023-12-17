@@ -6,10 +6,16 @@ class GameParser():
     logger = LoggerContext()
     def parsAGame(self, text):
         subTexts=text.split(": ")
-        game = Game(subTexts[0])
+        game = Game(self.getGameName(subTexts[0]))
+        game.gameID = self.getGameID(subTexts[0])
         game.gameTurns = self.getTurns(subTexts[1])
-        print (game.gameTurns)
         return game
+
+    def getGameName(self, text):
+        return text.split(" ")[0]
+
+    def getGameID(self, text):
+        return int(text.split(" ")[1])
 
     def getTurns(self, text):
         subTexts=text.split("; ")
