@@ -18,8 +18,8 @@ class Interactor():
 
     def calculateAndSum(self, rows):
         rows = rows.splitlines()
-        total = 0
         fnit=FindNumberInText()
+        total = 0
         for row in rows:
             total += fnit.findNumber(row)
         return total

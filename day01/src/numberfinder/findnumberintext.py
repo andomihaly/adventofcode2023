@@ -2,8 +2,10 @@ import re
 from loggercontext import LoggerContext
 
 class FindNumberInText():
-    textNumber = ["zero", "two", "one", "nine", "five", "three", "eight", "four", "six", "seven"]
-    digitNumber = ["0", "2", "1", "9", "5", "3", "8", "4", "6", "7"]
+    mixedTextNumber = ["nineight","eightwo","twone","eighthree"]
+    mixedDigitNumber = ["9ight","8wo","2ne","8hree"]
+    textNumber = ["zero",  "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    digitNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     logger = LoggerContext()
     def findNumber(self, text):
         textWithDigit = self.convertTextNumberToDigit(text)
@@ -13,10 +15,14 @@ class FindNumberInText():
 
     def convertTextNumberToDigit(self, text):
         oldtext = text
-        self.logger.debug("old:\t"+oldtext)
-        for i in range(len(self.textNumber) - 1):
+        self.logger.debug("original:\t\t"+oldtext)
+        for i1 in range(len(self.mixedTextNumber)):
+            text = text.replace(self.mixedTextNumber[i1], self.mixedDigitNumber[i1])
+            self.logger.debug("i1 case:\t"+text+"-- "+self.mixedTextNumber[i1]+"-"+ self.mixedDigitNumber[i1] )
+        self.logger.debug("after special case:\t"+text)
+        for i in range(len(self.textNumber)):
             text = text.replace(self.textNumber[i], self.digitNumber[i])
-        self.logger.debug(" new text: \t" + text)
+        self.logger.debug("new text:\t\t" + text)
         return text
 
     def getNumberFromDigits(self, text):

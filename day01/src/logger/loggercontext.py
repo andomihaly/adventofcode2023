@@ -7,7 +7,7 @@ class LoggerContext(object):
     def __new__(cls):
         if cls._instance is None:
             cls._instance = logging.getLogger()
-            cls._instance.setLevel(logging.INFO)
+            cls._instance.setLevel(logging.ERROR)
             handler = logging.StreamHandler(sys.stdout)
             formatter = logging.Formatter('%(levelname)s - %(message)s')
             handler.setFormatter(formatter)
@@ -15,6 +15,5 @@ class LoggerContext(object):
             cls._instance.info("New logger is created.")
         cls._instance.info("Ask logger")
         return cls._instance
-
 
 
