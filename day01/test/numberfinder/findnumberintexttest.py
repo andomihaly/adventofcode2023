@@ -50,4 +50,9 @@ class FindNumberInTextTest(unittest.TestCase):
         self.assertEqual(28, self.findNumber.findNumber("twoneightwo"))
         self.assertEqual(28, self.findNumber.findNumber("twoneightheeighthree"))
         self.assertEqual(23, self.findNumber.findNumber("twoneightheeigh4three"))
-
+        self.assertEqual(78, self.findNumber.findNumber("sevenineighthree"))
+        self.assertEqual(33, self.findNumber.findNumber("sthreeighthreeight"))
+    def test_complex1(self):
+        self.assertEqual(88, self.findNumber.findNumber("eighthreeighthree"))
+    def test_complex2(self):
+        self.assertEqual(33, self.findNumber.findNumber("sthreeighthreeight"))

@@ -2,8 +2,8 @@ import re
 from loggercontext import LoggerContext
 
 class FindNumberInText():
-    mixedTextNumber = ["nineight","eightwo","twone","eighthree"]
-    mixedDigitNumber = ["9ight","8wo","2ne","8hree"]
+    mixedTextNumber = ["threeighthree","eighthreeight","zerone","threeight","sevenine","nineight","eightwo","twone","eighthree"]
+    mixedDigitNumber = ["3igh3","8hre8","0ne","3ight","7ine","9ight","8wo","2ne","8hree"]
     textNumber = ["zero",  "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     digitNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     logger = LoggerContext()
@@ -16,6 +16,7 @@ class FindNumberInText():
     def convertTextNumberToDigit(self, text):
         oldtext = text
         self.logger.debug("original:\t\t"+oldtext)
+        self.saveIfSpecialCases(text)
         for i1 in range(len(self.mixedTextNumber)):
             text = text.replace(self.mixedTextNumber[i1], self.mixedDigitNumber[i1])
             self.logger.debug("i1 case:\t"+text+"-- "+self.mixedTextNumber[i1]+"-"+ self.mixedDigitNumber[i1] )
@@ -24,6 +25,14 @@ class FindNumberInText():
             text = text.replace(self.textNumber[i], self.digitNumber[i])
         self.logger.debug("new text:\t\t" + text)
         return text
+
+    def saveIfSpecialCases(self,text):
+        res = any(ele in text for ele in self.mixedTextNumber)
+        if res:
+            file1 = open("specialcases.txt", "a")
+            file1.write(text+"\n")
+            file1.close()
+
 
     def getNumberFromDigits(self, text):
         digits = re.findall(r'\d', text)
