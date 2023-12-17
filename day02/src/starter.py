@@ -12,8 +12,8 @@ from color import Color
 
 if __name__ == '__main__':
     folderOfFiles ="loader\\";
-    fileName = "example.txt"
-    #fileName = "advent_day2_e1.txt"
+    #fileName = "example.txt"
+    fileName = "advent_day2_e1.txt"
     tfl= TextFileLoader(folderOfFiles +fileName)
     dices=dict()
     dices[Color.RED]=12;
