@@ -51,8 +51,15 @@ class FindNumberInTextTest(unittest.TestCase):
         self.assertEqual(28, self.findNumber.findNumber("twoneightheeighthree"))
         self.assertEqual(23, self.findNumber.findNumber("twoneightheeigh4three"))
         self.assertEqual(78, self.findNumber.findNumber("sevenineighthree"))
-        self.assertEqual(33, self.findNumber.findNumber("sthreeighthreeight"))
     def test_complex1(self):
         self.assertEqual(88, self.findNumber.findNumber("eighthreeighthree"))
-    def test_complex2(self):
-        self.assertEqual(33, self.findNumber.findNumber("sthreeighthreeight"))
+    def test_casesFromFileExample(self):
+        self.assertEqual(87, self.findNumber.findNumber("xqeightwojhbrrrqgdtbcqlhthreesixsreight7rxxgqntqdqlbnm"))
+        self.assertEqual(89, self.findNumber.findNumber("rveightwobhqtmjhsrptpzkbv3ninem"))
+        self.assertEqual(68, self.findNumber.findNumber("61gslvnlcjlsfgdsflqp1rnqdgktfseveneightwom"))
+        self.assertEqual(98, self.findNumber.findNumber("nineninelnknxhbfk4xssrlsdmsixoneltjseightwofzf"))
+
+    #no this kind of text in a given file
+    #def test_complex2(self):
+    #    self.assertEqual(33, self.findNumber.findNumber("sthreeighthreeight"))
+
