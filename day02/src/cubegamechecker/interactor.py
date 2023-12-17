@@ -1,6 +1,7 @@
 from loggercontext import LoggerContext
 from gameparser import GameParser
 from color import Color
+from minimumdicescalculator import MinimumDicesCalculator
 
 class Interactor():
     logger = LoggerContext()
@@ -17,6 +18,15 @@ class Interactor():
         sumOfIDs=self.sumGameIdIfPossible(fileContent)
         self.logger.info("sum is calculated:"+str(sumOfIDs))
         print(sumOfIDs)
+
+    def runPowerOfMinimumDices(self):
+        self.logger.info("process started")
+        fileContent = self.contentLoader.loadContent()
+        self.logger.info("content loaded")
+        #business logic
+        power=self.powerOfMinimumDices(fileContent)
+        self.logger.info("sum is calculated:"+str(power))
+        print(power)
 
     def sumGameIdIfPossible(self, games):
         games = games.splitlines()
@@ -39,5 +49,23 @@ class Interactor():
                     return True
         return False
 
+    def powerOfMinimumDices(self,games):
+        games = games.splitlines()
+        gameParser = GameParser()
+        minimumDicesCalculator=MinimumDicesCalculator()
+        sumOfPower=0
+        for gameText in games:
+            self.logger.info("next: " + gameText)
+            game=gameParser.parsAGame(gameText)
+            minimumDices=minimumDicesCalculator.calculate(game)
+            sumOfPower+=self.calculatePower(minimumDices)
+        return sumOfPower
+
+    def calculatePower(self,minimumDices):
+        power=1
+        for elemet in Color:
+            if (minimumDices[elemet]>0):
+                power *= minimumDices[elemet]
+        return power
 
 

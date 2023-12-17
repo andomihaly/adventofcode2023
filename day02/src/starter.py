@@ -21,3 +21,4 @@ if __name__ == '__main__':
     dices[Color.BLUE]=14;
     interactor = Interactor(tfl)
     interactor.run(dices)
+    interactor.runPowerOfMinimumDices()
