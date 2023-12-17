@@ -7,6 +7,7 @@ sys.path.append(root_dir+"\\src\\cubegamechecker")
 sys.path.append(root_dir+"\\src\\logger")
 
 from cubegamechecker.gameparsertest import GameParseTest
+from cubegamechecker.minimumdicescalculatortest import MinimumDicesCalculatorTest
 
 if __name__ == '__main__':
     unittest.main()
