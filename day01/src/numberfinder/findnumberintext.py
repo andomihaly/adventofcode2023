@@ -72,7 +72,7 @@ class FindNumberInText():
                 lastNumber = self.reverseTextToNumber[nextNumber]
             break
         return lastNumber
-    
+
     def addTab(self, text):
         if (len(text)>10):
             return "\t"
