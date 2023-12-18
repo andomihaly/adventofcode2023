@@ -102,4 +102,18 @@ class FindNumberWithBorderTest(unittest.TestCase):
         self.assertEqual(539, result[9])
         self.assertEqual(21, result[10])
 
+    def test_similarNumber(self):
+         result = self.border.findBorderedNumbers("$...","58..5",".....")
+         self.assertEqual(1, len(result))
+         self.assertEqual(58, result[0])
+
+    def test_FromProduction2(self):
+         a="...................*................*......214.134......................*805.%.....*.....*....*.....#.....*..........*....302.....934..=...."
+         b="....835.........622..............8...541...*....*..861....442....874..........458...955...985..172.....497.310........341......$....*...644."
+         c="....*......246......909....320.............893.150....*.....*....*........717................................................833.178........"
+         result = self.border.findBorderedNumbers(a,b,c)
+         self.assertEqual(14, len(result))
+
+
+
 

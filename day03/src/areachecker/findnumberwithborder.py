@@ -21,6 +21,12 @@ class FindNumberWithBorder():
             self.checkCandidte(candidate)
             if (self.isCandidateOk):
                 self.borderedNumbers.append(int(candidate))
+            #removetext
+            lenght=len(candidate)
+            position=self.row.find(candidate)
+            self.row=self.row[0:position]+self.row[position+lenght:len(self.row)]
+            self.aboveRow = self.aboveRow[lenght:len(self.aboveRow)]
+            self.belowRow = self.belowRow[lenght:len(self.belowRow)]
 
     def checkCandidte(self, candidate):
         self.checkBelow(candidate)
