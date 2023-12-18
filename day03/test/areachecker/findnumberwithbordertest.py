@@ -13,6 +13,7 @@ class FindNumberWithBorderTest(unittest.TestCase):
     def test_NoNumber2(self):
         self.assertEqual(0, len(self.border.findBorderedNumbers(".....","..5..",".....")))
         self.assertEqual(0, len(self.border.findBorderedNumbers(".....","-.5.*",".....")))
+        self.assertEqual(0, len(self.border.findBorderedNumbers("555..","5.5.5","55...")))
 
     def test_NoNumber3(self):
         self.assertEqual(0, len(self.border.findBorderedNumbers(".....",".5.5.",".....")))
@@ -29,6 +30,9 @@ class FindNumberWithBorderTest(unittest.TestCase):
 
     def test_easyNumberInSpecialPosition(self):
         result = self.border.findBorderedNumbers(".....","..$32",".....")
+        self.assertEqual(1, len(result))
+        self.assertEqual(32, result[0])
+        result = self.border.findBorderedNumbers(".....","..-32",".....")
         self.assertEqual(1, len(result))
         self.assertEqual(32, result[0])
         result = self.border.findBorderedNumbers(".....","34/..",".....")
@@ -79,3 +83,23 @@ class FindNumberWithBorderTest(unittest.TestCase):
     def test_NumberInCorner(self):
         result = self.border.findBorderedNumbers(".1.1.","..3..",".4.4.")
         self.assertEqual(0, len(result))
+
+    def test_FromProduction(self):
+        a="............*....-..811..........846..855......*.............*..$........230.92@............................=.....................92........"
+        b="..........360..........#....664.....=.*...881...677...934.780.......426.*..........8......654.....*959.....539..........21.........*........"
+        c=".....................+.........*......379..*.........*.........=.........969........*........*.976..............872....*....../....579......"
+        result = self.border.findBorderedNumbers(a,b,c)
+        self.assertEqual(11, len(result))
+        self.assertEqual(360, result[0])
+        self.assertEqual(664, result[1])
+        self.assertEqual(881, result[2])
+        self.assertEqual(677, result[3])
+        self.assertEqual(934, result[4])
+        self.assertEqual(780, result[5])
+        self.assertEqual(8, result[6])
+        self.assertEqual(654, result[7])
+        self.assertEqual(959, result[8])
+        self.assertEqual(539, result[9])
+        self.assertEqual(21, result[10])
+
+

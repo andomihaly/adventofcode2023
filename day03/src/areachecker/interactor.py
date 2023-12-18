@@ -23,6 +23,7 @@ class Interactor():
         sum=0
         for index in range(1,len(rows)-1):
             numbers=findNumber.findBorderedNumbers(rows[index-1],rows[index],rows[index+1])
+            self.logger.warning("row no:\t"+str(index)+" \tfindNumbers: \t"+str(numbers))
             for number in numbers:
                 sum+=number
         return sum
@@ -37,5 +38,5 @@ class Interactor():
         extendedRows.append(temprow)
         extendedRows +=rows
         extendedRows.append(temprow)
-        self.logger.debug(extendedRows)
+        self.logger.warning(extendedRows)
         return extendedRows
