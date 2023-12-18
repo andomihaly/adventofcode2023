@@ -3,7 +3,7 @@ import os
 
 parent_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(parent_dir)
-sys.path.append(parent_dir+"\\cubegamechecker")
+sys.path.append(parent_dir+"\\areachecker")
 sys.path.append(parent_dir+"\\loader")
 sys.path.append(parent_dir+"\\logger")
 from textfileloader import TextFileLoader
