@@ -2,62 +2,77 @@ import re
 from loggercontext import LoggerContext
 
 class FindNumberInText():
-    mixedTextNumber = ["eighthreeight","zerone","threeight","sevenine","nineight","eightwo","twone","eighthree","fiveight"]
-    mixedDigitNumber = ["8hre8","0ne","3ight","7ine","9ight","8wo","2ne","8hree","5ight"]
-    textNumber = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    digitNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    textToNumber=dict()
+    textToNumber["zero"]=0
+    textToNumber["one"]=1
+    textToNumber["two"]=2
+    textToNumber["three"]=3
+    textToNumber["four"]=4
+    textToNumber["five"]=5
+    textToNumber["six"]=6
+    textToNumber["seven"]=7
+    textToNumber["eight"]=8
+    textToNumber["nine"]=9
+    reverseTextToNumber=dict()
+    reverseTextToNumber["orez"]=0
+    reverseTextToNumber["eno"]=1
+    reverseTextToNumber["owt"]=2
+    reverseTextToNumber["eerht"]=3
+    reverseTextToNumber["ruof"]=4
+    reverseTextToNumber["evif"]=5
+    reverseTextToNumber["xis"]=6
+    reverseTextToNumber["neves"]=7
+    reverseTextToNumber["thgie"]=8
+    reverseTextToNumber["enin"]=9
     logger = LoggerContext()
+
     def findNumber(self, text):
-        textWithDigit = self.convertTextNumberToDigit(text)
-        number = self.getNumberFromDigits(textWithDigit)
-        #self.saveIfSpecialCases(text, textWithDigit, number)
-        #self.saveIfTextCount(text, textWithDigit, number)
-        self.logger.info("text: "+text+self.addTab(text)+" just digit: "+textWithDigit+self.addTab(textWithDigit)+" number: \t"+str(number))
+        number = self.convertTextNumberToDigit(text)
+        self.logger.info("text: "+text+self.addTab(text)+" number: \t"+str(number))
         return number
 
     def convertTextNumberToDigit(self, text):
         oldtext = text
         self.logger.debug("original:\t\t"+oldtext)
-        for i1 in range(len(self.mixedTextNumber)):
-            text = text.replace(self.mixedTextNumber[i1], self.mixedDigitNumber[i1])
-            self.logger.debug("i1 case:\t"+text+"-- "+self.mixedTextNumber[i1]+"-"+ self.mixedDigitNumber[i1] )
-        self.logger.debug("after special case:\t"+text)
-        for i in range(len(self.textNumber)):
-            text = text.replace(self.textNumber[i], self.digitNumber[i])
-        self.logger.debug("new text:\t\t" + text)
-        return text
+        firstNumber = self.getFirstNumberInText(text)
+        text = self.replaceNumberTextFrom(text)
+        lastNumber = self.getLastNumberInText(text)
+        self.logger.debug("first letter:\t"+str(firstNumber)+"\tlastletter:\t"+str(lastNumber))
+        return int(str(firstNumber)+str(lastNumber))
 
-    def saveIfSpecialCases(self,text, digittext, number):
-        res = any(ele in text for ele in self.textNumber)
-        if res:
-            file1 = open("specialcases2.txt", "a")
-            file1.write(text+"\t "+digittext+"\t "+str(number)+"\n")
-            file1.close()
-    def saveIfTextCount(self,text, digittext, number):
-        number2 = self.getNumberFromDigits(text)
-        if number!=number2:
-            file1 = open("specialcasestextcount3.txt", "a")
-            file1.write(text+"\t "+digittext+"\t "+str(number)+"\n")
-            file1.close()
-        else:
-            file1 = open("normalcase4.txt", "a")
-            file1.write(text+"\t "+digittext+"\t "+str(number)+"\n")
-            file1.close()
+    def getFirstNumberInText(self, text):
+        numbers = re.findall(r'\d|zero|one|two|three|four|five|six|seven|eight|nine',text)
+        firstNumber = -1
+        for nextNumber in numbers:
+            if (nextNumber.isnumeric()):
+                firstNumber = int(nextNumber)
+            else:
+                firstNumber = self.textToNumber[nextNumber]
+            break
+        return firstNumber
 
-    def getNumberFromDigits(self, text):
-        digits = re.findall(r'\d', text)
-        s1 = self.getFirstDigit(digits)
-        s2 = self.getLastDigit(digits)
-        number = s1 + s2
-        self.logger.debug(number)
-        return int(number)
+    def replaceNumberTextFrom(self, text):
+        newText=text
+        numbers = re.findall(r'\d|zero|one|two|three|four|five|six|seven|eight|nine',text)
+        for nextNumber in numbers:
+            if (not nextNumber.isnumeric()):
+                self.logger.debug("cserelendo: "+nextNumber)
+                newText=text.replace(nextNumber, str(self.textToNumber[nextNumber]), 1)
+            break
+        return newText
 
-    def getFirstDigit(self, digits):
-        return digits[0]
-
-    def getLastDigit(self, digits):
-        return digits[len(digits) - 1]
-
+    def getLastNumberInText(self, text):
+        reverseText = text[::-1]
+        numbers = re.findall(r'\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin',reverseText)
+        lastNumber=-1
+        for nextNumber in numbers:
+            if (nextNumber.isnumeric()):
+                lastNumber = int(nextNumber)
+            else:
+                lastNumber = self.reverseTextToNumber[nextNumber]
+            break
+        return lastNumber
+    
     def addTab(self, text):
         if (len(text)>10):
             return "\t"

@@ -45,19 +45,23 @@ class FindNumberInTextTest(unittest.TestCase):
 
     #complextest
     def test_complex(self):
-        self.assertEqual(88, self.findNumber.findNumber("eighthreeightwo"))
+        self.assertEqual(82, self.findNumber.findNumber("eighthreeightwo"))
         self.assertEqual(81, self.findNumber.findNumber("eighthreeightwone"))
-        self.assertEqual(28, self.findNumber.findNumber("twoneightwo"))
-        self.assertEqual(28, self.findNumber.findNumber("twoneightheeighthree"))
+        self.assertEqual(22, self.findNumber.findNumber("twoneightwo"))
+        self.assertEqual(23, self.findNumber.findNumber("twoneightheeighthree"))
         self.assertEqual(23, self.findNumber.findNumber("twoneightheeigh4three"))
-        self.assertEqual(78, self.findNumber.findNumber("sevenineighthree"))
+        self.assertEqual(73, self.findNumber.findNumber("sevenineighthree"))
     def test_complex1(self):
-        self.assertEqual(88, self.findNumber.findNumber("eighthreeighthree"))
+        self.assertEqual(83, self.findNumber.findNumber("eighthreeighthree"))
     def test_casesFromFileExample(self):
         self.assertEqual(87, self.findNumber.findNumber("xqeightwojhbrrrqgdtbcqlhthreesixsreight7rxxgqntqdqlbnm"))
         self.assertEqual(89, self.findNumber.findNumber("rveightwobhqtmjhsrptpzkbv3ninem"))
-        self.assertEqual(68, self.findNumber.findNumber("61gslvnlcjlsfgdsflqp1rnqdgktfseveneightwom"))
-        self.assertEqual(98, self.findNumber.findNumber("nineninelnknxhbfk4xssrlsdmsixoneltjseightwofzf"))
+        self.assertEqual(62, self.findNumber.findNumber("61gslvnlcjlsfgdsflqp1rnqdgktfseveneightwom"))
+        self.assertEqual(92, self.findNumber.findNumber("nineninelnknxhbfk4xssrlsdmsixoneltjseightwofzf"))
+
+    #example based on githubcode
+    def test_BasedOnGithub(self):
+        self.assertEqual(98, self.findNumber.findNumber("9963onefourthree6oneightq"))
 
     #no this kind of text in a given file
     #def test_complex2(self):
