@@ -9,6 +9,8 @@ sys.path.append(root_dir+"\\src\\logger")
 from scratchcard.cardtest import CardTest
 from scratchcard.cardparsertest import CardParserTest
 from scratchcard.calculatecardstest import CalculateCardsTest
+from scratchcard.calculatecardcopiestest import CalculateCardCopiesTest
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,3 +10,5 @@ class Card():
         if (len(hitNumbers)==0):
             return 0
         return pow(2,len(hitNumbers)-1)
+    def getNumberOfHit(self):
+         return  len(list(set(self.numbers) & set(self.winningNumbers)))
