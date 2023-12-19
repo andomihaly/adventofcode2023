@@ -17,3 +17,4 @@ if __name__ == '__main__':
     tfl= TextFileLoader(folderOfFiles +fileName)
     interactor = Interactor(tfl)
     interactor.run()
+    interactor.runCopies()

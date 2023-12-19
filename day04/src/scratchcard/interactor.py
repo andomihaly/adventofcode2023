@@ -1,5 +1,6 @@
 from loggercontext import LoggerContext
 from calculatecards import CalculateCards
+from calculatecardcopies import CalculateCardCopies
 
 class Interactor():
     logger = LoggerContext()
@@ -20,13 +21,13 @@ class Interactor():
 
     def runCopies(self):
         print(self.logger)
-        self.logger.info("process started")
+        self.logger.info("copies process started")
         fileContent = self.contentLoader.loadContent()
         self.logger.info("content loaded")
         #business logic
-        result = CalculateCards().sumWinningScore(fileContent.splitlines())
+        result = CalculateCardCopies().sumCopies(fileContent.splitlines())
 
-        self.logger.info("sum is calculated:"+str(result))
+        self.logger.info("sum copied card is calculated:"+str(result))
         print(result)
 
 
