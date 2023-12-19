@@ -7,6 +7,7 @@ sys.path.append(root_dir+"\\src\\areachecker")
 sys.path.append(root_dir+"\\src\\logger")
 
 from areachecker.findnumberwithbordertest import FindNumberWithBorderTest
+from areachecker.gearnumberfindertest import GearNumberFinderTest
 
 if __name__ == '__main__':
     unittest.main()
