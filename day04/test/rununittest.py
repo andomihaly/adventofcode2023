@@ -6,6 +6,7 @@ root_dir=parent_dir.replace("\\test", "")
 sys.path.append(root_dir+"\\src\\scratchcard")
 sys.path.append(root_dir+"\\src\\logger")
 
+from scratchcard.cardtest import CardTest
 from scratchcard.cardparsertest import CardParserTest
 from scratchcard.calculatecardstest import CalculateCardsTest
 
