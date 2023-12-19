@@ -11,8 +11,8 @@ from interactor import Interactor
 
 if __name__ == '__main__':
     folderOfFiles ="loader\\";
-    fileName = "example.txt"
-    #fileName = "advent_day3_e1.txt"
+    #fileName = "example.txt"
+    fileName = "advent_day3_e1.txt"
 #528807 too high
     tfl= TextFileLoader(folderOfFiles +fileName)
     interactor = Interactor(tfl)
