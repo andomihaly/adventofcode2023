@@ -1,5 +1,6 @@
 from loggercontext import LoggerContext
 from findnumberwithborder import FindNumberWithBorder
+from gearnumberfinder import GearNumberFinder
 
 class Interactor():
     logger = LoggerContext()
@@ -40,3 +41,25 @@ class Interactor():
         extendedRows.append(temprow)
         self.logger.warning(extendedRows)
         return extendedRows
+
+    def runGearNumberSum(self):
+        print(self.logger)
+        self.logger.info("process started")
+        fileContent = self.contentLoader.loadContent()
+        self.logger.info("content loaded")
+        #business logic
+        result = self.calculateGearNumberSum(fileContent)
+
+        self.logger.info("sum is calculated:"+str(result))
+
+    def calculateGearNumberSum(self, fileContent):
+        rows = self.extendContent(fileContent)
+        gearNumberFinder = GearNumberFinder()
+        sum=0
+        for index in range(1,len(rows)-1):
+            numbers=gearNumberFinder.findGearNumber(rows[index-1],rows[index],rows[index+1])
+            self.logger.warning("row no:\t"+str(index)+" \tfindNumbers: \t"+str(numbers))
+            for number in numbers:
+
+                sum+=number[0]*number[1]
+        return sum
