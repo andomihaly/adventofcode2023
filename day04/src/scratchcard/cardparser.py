@@ -1,8 +1,7 @@
 import re
-from loggercontext import LoggerContext
 from card import Card
+
 class CardParser():
-    logger = LoggerContext()
     def pars(self, text):
         card = Card()
         subTexts=text.split(": ")

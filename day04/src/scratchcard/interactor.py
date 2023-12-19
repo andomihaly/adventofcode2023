@@ -13,8 +13,10 @@ class Interactor():
         fileContent = self.contentLoader.loadContent()
         self.logger.info("content loaded")
         #business logic
-        self.logger.info("sum is calculated:"+str("result"))
-        print("result")
+        result = CalculateCards().sumWinningScore(fileContent.splitlines())
+
+        self.logger.info("sum is calculated:"+str(result))
+        print(result)
 
 
 
