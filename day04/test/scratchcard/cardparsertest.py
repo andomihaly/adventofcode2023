@@ -5,7 +5,7 @@ class CardParserTest(unittest.TestCase):
 
     def test_parseACard(self):
         parser=CardParser()
-        card=parser.pars("Card 1:  1  2  3  4  5 |  8  7  6  5  4  3  2  1")
+        card=parser.pars("Card  1:  1  2  3  4  5 |  8  7  6  5  4  3  2  1")
         self.assertEqual("Card",card.name)
         self.assertEqual(1, card.id)
         self.assertEqual([1,2,3,4,5],card.numbers)

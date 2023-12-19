@@ -5,9 +5,8 @@ class CardParser():
     def pars(self, text):
         card = Card()
         subTexts=text.split(": ")
-        baseData=subTexts[0].split(" ")
-        card.name=baseData[0]
-        card.id=int(baseData[1])
+        card.name="Card"
+        card.id=int(re.findall(r'\d+', subTexts[0])[0])
         numbersText=subTexts[1].split(" | ")
         numbers = re.findall(r'\d+', numbersText[0])
         card.numbers = [int(num) for num in numbers ]
