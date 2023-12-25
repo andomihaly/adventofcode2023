@@ -38,15 +38,32 @@ class CalculateSeeds():
                 seedRanges=cns.calcRange(map, oneSeedRange)
                 newSeedsRanges+=seedRanges
 
+            #check is no more seeds then started
+            self.checkNumberOfSeeds2(newSeedsRanges,actualSeedsRange)
             actualSeedsRange=newSeedsRanges
             historySeeds.append(newSeedsRanges)
             self.logger.debug("new seed ranges: "+str(newSeedsRanges))
 
 
+
         self.logger.debug("Last seeds array: "+str(historySeeds[len(historySeeds)-1]))
         return historySeeds[len(historySeeds)-1]
 
+    def checkNumberOfSeeds2(self, seedOut, seedIn):
+        sum1=0;
+        for seedRange in seedOut:
+            sum1+=(seedRange[1]-seedRange[0]+1)
+            self.logger.debug(str(seedRange[1])+"-"+str(seedRange[0])+"="+str(seedRange[1]-seedRange[0]))
+        sum2=0;
+        for seedRange in seedIn:
+            sum2+=(seedRange[1]-seedRange[0]+1)
+        if (not sum1==sum2):
+            self.logger.debug("seed in:" + str(seedIn) + "sum:"+str(sum2))
+            self.logger.debug("seed out:" + str(seedOut) + "sum:"+str(sum1))
+            raise Exception("Extra seed added")
+
     def createRangeSeeds(self, seeds):
+        self.logger.debug("seed: \t"+str(seeds))
         rangeSeeds=[]
         for index in range(0,len(seeds),2):
             seedrange=[]
@@ -54,4 +71,5 @@ class CalculateSeeds():
             seedrange.append(seeds[index]+seeds[index+1]-1)
             rangeSeeds.append(seedrange)
 
+        self.logger.debug("range: \t"+str(rangeSeeds))
         return rangeSeeds

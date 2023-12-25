@@ -16,7 +16,20 @@ class CalculateNextSeed():
             self.convertSeedsInMap(row)
         self.addSeedsWhichIsNotConverted()
         self.addIfFullOutOfRange(seedRange)
+
+        self.checkNumberOfSeeds(seedRange,self.newSeedRange)
+
         return self.newSeedRange
+
+    def checkNumberOfSeeds(self, seedIn, seedOut):
+        print(seedIn)
+        print(seedOut)
+        sum1=seedIn[1]-seedIn[0]+1
+        sum2=0;
+        for seedRange in seedOut:
+            sum2+=(seedRange[1]-seedRange[0]+1)
+        if (not sum1==sum2):
+           raise Exception("Extra seed added")
 
     def convertSeedsInMap(self, row):
         lowerBound = self.lowerBound
@@ -32,15 +45,15 @@ class CalculateNextSeed():
             self.newSeedRange.append([row[1], row[1] + row[2] - 1])
             if (row[2] + row[0] + 1 > self.transformUpperBound):
                 self.transformUpperBound = row[2] + row[0]
-            if (row[2] < self.transformLowerBound):
-                self.transformLowerBound = row[1] - 1
+            if (row[0] < self.transformLowerBound):
+                self.transformLowerBound = row[0] - 1
 
     def seedRangeLowerOut(self, lowerBound, row, upperBound):
         if (self.isLowerBoundOut(row[0], row[0] + row[2] - 1, lowerBound, upperBound)):
             self.newSeedRange.append([row[1], upperBound + row[1] - row[0]])
             self.transformUpperBound = upperBound
-            if (row[2] < self.transformLowerBound):
-                self.transformLowerBound = row[1] - 1
+            if (row[0] < self.transformLowerBound):
+                self.transformLowerBound = row[0] - 1
 
     def seedRangeUpperOut(self, lowerBound, row, upperBound):
         if (self.isUpperBoundOut(row[0], row[0] + row[2] - 1, lowerBound, upperBound)):

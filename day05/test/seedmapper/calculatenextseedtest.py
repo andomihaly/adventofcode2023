@@ -69,14 +69,20 @@ class CalculateNextSeedTest(unittest.TestCase):
     def test_SeveralRange(self):
         self.assertEqual([[0,36],[37,38],[54,60]],self.calc.calcRange(self.map, [15,60]))
 
-    def test_SeveralRange(self):
+    def test_SeveralRange2(self):
         map=dict()
         map["name"]="test map"
         map["map"]=[[50,52,48],[98,50,2]]
         self.assertEqual([[52,99],[50,51],[0,49],[100,150]],self.calc.calcRange(map, [0,150]))
 
-    def test_SeveralRange(self):
+    def test_FromLife(self):
         map=dict()
         map["name"]="test map"
-        map["map"]=[[50,52,48],[98,50,2]]
-        self.assertEqual([[52,99],[50,51],[0,49],[100,150]],self.calc.calcRange(map, [0,150]))
+        map["map"]=[[56, 60, 37], [93, 56, 4]]
+        self.assertEqual([[60,60],[46,55]],self.calc.calcRange(map, [46, 56]))
+
+    def test_FromLife2(self):
+        map=dict()
+        map["name"]="test map"
+        map["map"]=[[56, 60, 37], [93, 56, 4]]
+        self.assertEqual([[94,96],[56,59],[97,98]],self.calc.calcRange(map, [90, 98]))
