@@ -11,9 +11,10 @@ from interactor import Interactor
 
 if __name__ == '__main__':
     folderOfFiles ="loader\\";
-    #fileName = "example.txt"
-    fileName = "advent_day5_e1.txt"
+    fileName = "example.txt"
+    #fileName = "advent_day5_e1.txt"
 
     tfl= TextFileLoader(folderOfFiles +fileName)
     interactor = Interactor(tfl)
     interactor.run()
+    interactor.runKerning()

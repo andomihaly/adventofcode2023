@@ -15,3 +15,9 @@ class BoatRacesParserTest(unittest.TestCase):
         result=bp.parse(input.splitlines())
         self.assertEqual(3, len(result))
         self.assertEqual([[1,5],[22,66],[33,777]], result)
+
+    def test_parseRaces(self):
+        input="Time:      1  22   33\nDistance:  5  66  777"
+        bp=BoatRacesParser()
+        result=bp.parseKerning(input.splitlines())
+        self.assertEqual([[12233,566777]], result)

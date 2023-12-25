@@ -19,11 +19,28 @@ class Interactor():
         self.logger.info("races info:\t"+str(races))
         options=brt.findWinningOptionsInRaces(races)
         self.logger.info("races options:\t"+str(options))
-        power=1
-        for option in options:
-            power*=len(option)
-        self.logger.info("multiplie number of race option:\t"+str(power))
+        power = self.multipleWinningOptions(options)
         print(power)
+
+    def runKerning(self):
+        self.logger.info("process started")
+        fileContent = self.contentLoader.loadContent()
+        self.logger.info("content loaded")
+        #business logic
+        bp=BoatRacesParser()
+        races=bp.parseKerning(fileContent.splitlines())
+        brt=BoatRaceTactics()
+        self.logger.info("races info:\t"+str(races))
+        options=brt.findWinningOptionsInRaces(races)
+        power = self.multipleWinningOptions(options)
+        print(power)
+
+    def multipleWinningOptions(self, options):
+        power = 1
+        for option in options:
+            power *= len(option)
+        self.logger.info("multiplie number of race option:\t" + str(power))
+        return power
 
 
 

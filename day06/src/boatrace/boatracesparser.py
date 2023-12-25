@@ -12,3 +12,8 @@ class BoatRacesParser():
         for i in range(0,len(times)):
             races.append([int(times[i]),int(distances[i])])
         return races
+
+    def parseKerning(self, input):
+        input[0]=input[0].replace(" ","")
+        input[1]=input[1].replace(" ","")
+        return self.parse(input)
