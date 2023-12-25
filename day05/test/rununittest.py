@@ -8,6 +8,7 @@ sys.path.append(root_dir+"\\src\\seedmapper")
 
 from seedmapper.createmaptest import CreateMapTest
 from seedmapper.calculatenextseedtest import CalculateNextSeedTest
+from seedmapper.dtoparsertest import DtoParserTest
 
 if __name__ == '__main__':
     unittest.main()

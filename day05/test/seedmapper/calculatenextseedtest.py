@@ -1,4 +1,5 @@
 import unittest
 
 class CalculateNextSeedTest(unittest.TestCase):
-    pass
+    def test_nextseed(self):
+        pass
