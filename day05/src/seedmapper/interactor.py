@@ -1,5 +1,6 @@
 from loggercontext import LoggerContext
-from calculatenextseed import CalculateNextSeed
+from calculateseeds import CalculateSeeds
+from dtoparser import DtoParser
 
 class Interactor():
     logger = LoggerContext()
@@ -12,9 +13,13 @@ class Interactor():
         self.logger.info("process started")
         fileContent = self.contentLoader.loadContent()
         self.logger.info("content loaded")
-        #business logic
-        self.logger.info("sum is calculated:"+str("result"))
-        print("result")
+        dtoParser=DtoParser()
+        dtoParser.parse(fileContent.splitlines())
+        calculateSeeds=CalculateSeeds()
+        result = calculateSeeds.calculate(dtoParser.getSeeds(), dtoParser.getMaps())
+
+        self.logger.info("sum is calculated:"+str(result))
+        print(min(result))
 
 
 
