@@ -7,7 +7,7 @@ class LoggerContext(object):
     def __new__(cls):
         if cls._instance is None:
             cls._instance = logging.getLogger()
-            cls._instance.setLevel(logging.DEBUG)
+            cls._instance.setLevel(logging.INFO)
             handler = logging.StreamHandler(sys.stdout)
             formatter = logging.Formatter('%(levelname)s - %(message)s')
             handler.setFormatter(formatter)

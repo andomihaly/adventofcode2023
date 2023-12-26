@@ -14,8 +14,8 @@ if __name__ == '__main__':
     folderOfFiles = "src\\loader\\"
     #fileName = "example.txt"
     #fileName = "example2.txt"
-    fileName = "example3.txt"
-    #fileName = "puzzleinput.txt"
+    #fileName = "example3.txt"
+    fileName = "puzzleinput.txt"
 
     tfl = TextFileLoader(folderOfFiles + fileName)
     interactor = Interactor(tfl)
