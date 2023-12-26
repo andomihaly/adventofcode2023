@@ -1,7 +1,11 @@
-from loggercontext import LoggerContext
+from camelcard import CamelCard
+
 
 class Parser():
-    logger = LoggerContext()
-
     def parse(self, input):
-        return 0
+        cards = []
+        # QQQJA 483
+        for row in input:
+            card, bid = row.split(" ")
+            cards.append(CamelCard(card, bid))
+        return cards

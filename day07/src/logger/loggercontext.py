@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 class LoggerContext(object):
     _instance = None
 

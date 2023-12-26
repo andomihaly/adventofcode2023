@@ -2,6 +2,7 @@ from loggercontext import LoggerContext
 from calculator import Calculator
 from parser import Parser
 
+
 class Interactor():
     logger = LoggerContext()
 
@@ -15,10 +16,10 @@ class Interactor():
 
         # business logic
         parser = Parser()
-        parser.parse(fileContent.splitlines())
+        cards = parser.parse(fileContent.splitlines())
         self.logger.info("content parsed")
 
         calculator = Calculator()
-        result = calculator.calculate()
+        result = calculator.calculate(cards)
         self.logger.info("result is calculated:" + str(result))
         print("Result: " + str(result))
