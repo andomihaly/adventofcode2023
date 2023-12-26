@@ -15,10 +15,11 @@ class Interactor():
 
         # business logic
         parser = Parser()
-        parser.parse(fileContent.splitlines())
+        network = parser.parse(fileContent.splitlines())
+        route = parser.parsePath(fileContent.splitlines())
         self.logger.info("content parsed")
 
         calculator = Calculator()
-        result = calculator.calculate()
+        result = calculator.calculate(route, network)
         self.logger.info("result is calculated:" + str(result))
         print("Result: " + str(result))
