@@ -1,4 +1,4 @@
-The goals are whit this project:
+The goals are with this project:
 - Learn python
 - Clean Code / clean architecture
 - Try different solution for the same problem (find, regexp etc...)
