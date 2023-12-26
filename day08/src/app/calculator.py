@@ -9,7 +9,7 @@ class Calculator():
         i=0
         stepCounter=0
         actualPosition="AAA"
-        while(i<10):
+        while(i<50):
             for nextMove in route:
                 stepCounter+=1
                 if nextMove=="L":
