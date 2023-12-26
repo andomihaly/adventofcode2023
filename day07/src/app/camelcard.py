@@ -60,7 +60,6 @@ class CamelCardWithJoker(CamelCard):
 
     def generateMap(self):
         map = self.createLetterDict()
-
         # count joker and remove from the cards
         joker = 0;
         if "J" in map:
@@ -71,7 +70,9 @@ class CamelCardWithJoker(CamelCard):
 
         # add joker in the best place
         if (joker > 0):
-            if (self.numberOfSameCards[0] > 3):
+            if (joker==5):
+                self.numberOfSameCards.append(5)
+            elif (self.numberOfSameCards[0] > 3):
                 self.numberOfSameCards[0] = 5
             else:
                 self.numberOfSameCards[0] += joker
