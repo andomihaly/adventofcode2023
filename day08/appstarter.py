@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 parent_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(parent_dir)
@@ -19,5 +20,9 @@ if __name__ == '__main__':
 
     tfl = TextFileLoader(folderOfFiles + fileName)
     interactor = Interactor(tfl)
+    start_time = time.time()
     #interactor.run()
     interactor.runGhost()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print("Elapsed time: ", elapsed_time)

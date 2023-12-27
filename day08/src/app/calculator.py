@@ -1,5 +1,6 @@
 from loggercontext import LoggerContext
-
+from math import lcm
+from functools import reduce
 
 class Calculator():
     logger = LoggerContext()
@@ -7,10 +8,10 @@ class Calculator():
     def calculate(self, route, network):
         self.logger.debug(network)
         self.logger.debug(route)
-        i = 0
+        emergencyBreak = 0
         stepCounter = 0
         actualPosition = "AAA"
-        while (i < 50):
+        while (emergencyBreak < 50):
             for nextMove in route:
                 stepCounter += 1
                 if nextMove == "L":
@@ -21,7 +22,7 @@ class Calculator():
                     break
             if actualPosition == "ZZZ":
                 break
-            i += 1
+            emergencyBreak += 1
         if (actualPosition != "ZZZ"):
             raise Exception("Destiniation is not find whitin 10 loops")
 
@@ -30,30 +31,36 @@ class Calculator():
     def calculateGhost(self, route, network):
         self.logger.debug(network)
         self.logger.debug(route)
-        i = 0
-        stepCounter = 0
-        actualPositions = self.collectStartingPoint(network)
-        while (i < 500000000000):
-            for nextMove in route:
-                stepCounter += 1
-                nextPositions = []
-                for position in actualPositions:
-                    if nextMove == "L":
-                        nextPositions.append(network[position][0])
-                    else:
-                        nextPositions.append(network[position][1])
-                actualPositions = nextPositions
-                self.logger.debug(str(stepCounter) + ". step:")
-                self.logger.debug(str(actualPositions))
-                if self.isFinish(actualPositions):
-                    break
-            if self.isFinish(actualPositions):
-                break
-            i += 1
-        if not self.isFinish(actualPositions):
-            raise Exception("Destination is not find with in X loops")
 
-        return stepCounter
+        firstStop={}
+        ghosts=self.collectStartingPoint(network)
+        for position in ghosts:
+            startPos=position
+            stepCounter = 0
+            emergencyBreak = 0
+            while (emergencyBreak < 100):
+                for nextTurn in route:
+                    stepCounter += 1
+                    if nextTurn == "L":
+                        position=network[position][0]
+                    else:
+                        position=network[position][1]
+                    if position.endswith('Z'):
+                        break
+                if position.endswith('Z'):
+                    break
+                emergencyBreak += 1
+            if not position.endswith('Z'):
+                raise Exception("Destination is not find with in 100 loops")
+            firstStop[startPos]=stepCounter
+
+        return self.calculateLCM(firstStop)
+
+    def calculateLCM(self, firstStop):
+        sum = 1
+        for item in firstStop:
+            sum = lcm(sum, firstStop[item])
+        return sum
 
     def collectStartingPoint(self, network):
         startPos = []
