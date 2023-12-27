@@ -21,7 +21,7 @@ if __name__ == '__main__':
     tfl = TextFileLoader(folderOfFiles + fileName)
     interactor = Interactor(tfl)
     start_time = time.time()
-    #interactor.run()
+    interactor.run()
     interactor.runGhost()
     end_time = time.time()
     elapsed_time = end_time - start_time

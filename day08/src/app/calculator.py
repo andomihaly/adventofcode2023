@@ -2,59 +2,67 @@ from loggercontext import LoggerContext
 from math import lcm
 from functools import reduce
 
+
 class Calculator():
     logger = LoggerContext()
 
     def calculate(self, route, network):
-        self.logger.debug(network)
-        self.logger.debug(route)
-        emergencyBreak = 0
-        stepCounter = 0
-        actualPosition = "AAA"
-        while (emergencyBreak < 50):
-            for nextMove in route:
-                stepCounter += 1
-                if nextMove == "L":
-                    actualPosition = network[actualPosition][0]
-                else:
-                    actualPosition = network[actualPosition][1]
-                if actualPosition == "ZZZ":
-                    break
-            if actualPosition == "ZZZ":
-                break
-            emergencyBreak += 1
-        if (actualPosition != "ZZZ"):
-            raise Exception("Destiniation is not find whitin 10 loops")
+        self.initRouteCalculator(network, route)
+        startPosition = "AAA"
+        self.findARoute(startPosition,"ZZZ")
 
-        return stepCounter
+        return self.firstStop[startPosition]
 
     def calculateGhost(self, route, network):
+        self.initRouteCalculator(network, route)
+        ghosts = self.collectStartingPoint()
+        for startPosition in ghosts:
+            self.findARoute(startPosition,"Z")
+
+        return self.calculateLCM(self.firstStop)
+
+    def initRouteCalculator(self, network, route):
         self.logger.debug(network)
         self.logger.debug(route)
+        self.network = network
+        self.route = route
+        self.firstStop = {}
 
-        firstStop={}
-        ghosts=self.collectStartingPoint(network)
-        for position in ghosts:
-            startPos=position
-            stepCounter = 0
-            emergencyBreak = 0
-            while (emergencyBreak < 100):
-                for nextTurn in route:
-                    stepCounter += 1
-                    if nextTurn == "L":
-                        position=network[position][0]
-                    else:
-                        position=network[position][1]
-                    if position.endswith('Z'):
-                        break
-                if position.endswith('Z'):
-                    break
-                emergencyBreak += 1
-            if not position.endswith('Z'):
-                raise Exception("Destination is not find with in 100 loops")
-            firstStop[startPos]=stepCounter
+    def findARoute(self, startPosition, stopper):
+        stepCounter = 0
+        emergencyBreak = 0
+        emergencyBreakMax = 99
 
-        return self.calculateLCM(firstStop)
+        position = startPosition
+        while (emergencyBreak < emergencyBreakMax):
+            position, stepCounter = self.goARoute(position, stepCounter, stopper)
+            if position.endswith(stopper):
+                break
+            emergencyBreak += 1
+
+        self.raiseAnExceptionIfRouteNotFound(emergencyBreak, emergencyBreakMax, startPosition)
+
+        self.firstStop[startPosition] = stepCounter
+
+    def goARoute(self, position, stepCounter, stopper):
+        for nextTurn in self.route:
+            position = self.doAStep(nextTurn, position)
+            stepCounter += 1
+            if position.endswith(stopper):
+                break
+        return position, stepCounter
+
+    def doAStep(self, nextTurn, position):
+        if nextTurn == "L":
+            position = self.network[position][0]
+        else:
+            position = self.network[position][1]
+        return position
+
+    def raiseAnExceptionIfRouteNotFound(self, emergencyBreak, emergencyBreakMax, startPosition):
+        if emergencyBreak == emergencyBreakMax:
+            raise Exception(
+                "Destination is not find from " + startPosition + " with in " + str(emergencyBreakMax) + " loops")
 
     def calculateLCM(self, firstStop):
         sum = 1
@@ -62,9 +70,9 @@ class Calculator():
             sum = lcm(sum, firstStop[item])
         return sum
 
-    def collectStartingPoint(self, network):
+    def collectStartingPoint(self):
         startPos = []
-        for position in network:
+        for position in self.network:
             if (position[2] == "A"):
                 startPos.append(position)
         self.logger.debug(str(startPos))
